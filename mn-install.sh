@@ -65,7 +65,7 @@ clear
 
 
 # Create bitcloud.conf
-  sudo mkdir .dinerocore
+  sudo mkdir .bitcloud
   echo '
   rpcuser='$password'
   rpcpassword='$password2'
@@ -77,8 +77,8 @@ clear
   masternode=1
   masternodeprivkey='$key'
   externalip='$ip'
-  ' | sudo -E tee ~/.dinerocore/dinero.conf >/dev/null 2>&1
-      sudo chmod 0600 ~/.dinerocore/dinero.conf
+  ' | sudo -E tee ~/.bitcloud/bitcloud.conf >/dev/null 2>&1
+      sudo chmod 0600 ~/.bitcloud/bitcloud.conf
 
   echo 'bitcloud.conf created'
   sleep 40
@@ -92,10 +92,10 @@ clear
 
 
 # Install Dinero Daemon
-  wget https://github.com/dinerocoin/dinero/releases/download/v1.0.1.0/dinerocore-1.0.1.0-linux64.tar.gz
-  sudo tar -xzvf dinerocore-1.0.1.0-linux64.tar.gz
-  sudo rm dinerocore-1.0.1.0-linux64.tar.gz
-  dinerocore-1.0.1/bin/dinerod -daemon
+  wget https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.0.7/linux.Ubuntu.16.04.LTS_non_static.tar.gz
+  sudo tar -xzvf linux.Ubuntu.16.04.LTS_non_static.tar.gz
+  sudo rm linux.Ubuntu.16.04.LTS_non_static.tar.gz
+  Bitcloud/src/bitcloudd
   clear
  
   sleep 10
@@ -112,7 +112,7 @@ clear
 cd
 
 # Starting Bitcloud daemon
-  dinerocore-1.0.1/bin/dinerod -daemon
+  Bitcloud/src/bitcloudd #ist das 2. Starten des Daemons notwendig?
 
   clear
   echo $STRING2
@@ -136,11 +136,11 @@ cd
 
   cd
   clear
-   echo $STRING2
-   echo $STRING13
-   echo $STRING3 
-   echo $STRING13
-   echo $STRING4    
+  echo $STRING2
+  echo $STRING13
+  echo $STRING3 
+  echo $STRING13
+  echo $STRING4    
 
   read -p "(this message will remain for at least 120 seconds) Then press any key to continue... " -n1 -s
-  dinerocore-1.0.1/bin/dinero-cli getinfo
+  Bitcloud/src/bitcloud-cli getinfo
