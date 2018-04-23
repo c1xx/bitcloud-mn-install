@@ -1,4 +1,8 @@
 #!/bin/bash
+# This script will install all required stuff to run a Bitcloud (BTDX) Masternode.
+# BitSend Repo : https://github.com/LIMXTEC/Bitcloud
+# !! THIS SCRIPT NEED TO RUN AS ROOT !!
+######################################################################
 
 cd
 
