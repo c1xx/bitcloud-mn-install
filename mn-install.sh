@@ -40,6 +40,7 @@ echo $STRING13
 echo $STRING2
 sleep 1
 dd if=/dev/zero of=/mnt/btdxswap.swap bs=2M count=1000
+sudo chmod 600 /mnt/btdxswap.swap
 mkswap /mnt/btdxswap.swap
 swapon /mnt/btdxswap.swap
 sleep 5
