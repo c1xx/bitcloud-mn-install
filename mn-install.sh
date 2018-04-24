@@ -41,8 +41,8 @@ clear
   echo $STRING2
   sleep 1
   dd if=/dev/zero of=/mnt/btdxswap.swap bs=2M count=1000
-  mkswap /mnt/mybtdxswap.swap
-  swapon /mnt/mybtdxswap.swap
+  mkswap /mnt/btdxswap.swap
+  swapon /mnt/btdxswap.swap
   sleep 5
   sudo apt-get -y update
   sudo apt-get -y upgrade
