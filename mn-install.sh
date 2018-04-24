@@ -73,20 +73,20 @@ clear
 
 
 # Create bitcloud.conf
-  sudo mkdir .bitcloud
-  echo '
-  rpcuser='$password'
-  rpcpassword='$password2'
-  rpcallowip=127.0.0.1
-  listen=1
-  server=1
-  daemon=1
-  maxconnections=256
-  masternode=1
-  masternodeprivkey='$key'
-  externalip='$ip'
-  ' | sudo -E tee ~/.bitcloud/bitcloud.conf >/dev/null 2>&1
-      sudo chmod 0600 ~/.bitcloud/bitcloud.conf
+sudo mkdir .bitcloud
+echo '
+rpcuser='$password'
+rpcpassword='$password2'
+rpcallowip=127.0.0.1
+listen=1
+server=1
+daemon=1
+maxconnections=256
+masternode=1
+masternodeprivkey='$key'
+externalip='$ip'
+' | sudo -E tee ~/.bitcloud/bitcloud.conf >/dev/null 2>&1
+    sudo chmod 0600 ~/.bitcloud/bitcloud.conf
 
   echo 'bitcloud.conf created'
   sleep 40
