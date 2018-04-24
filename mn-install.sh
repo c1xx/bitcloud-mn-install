@@ -1,6 +1,6 @@
 #!/bin/bash
-# This script will install all required stuff to run a Bitcloud (BTDX) Masternode.
-# BitSend Repo : https://github.com/LIMXTEC/Bitcloud
+# This script will install all required stuff to run a BitCloud (BTDX) Masternode.
+# BitCloud Repository : https://github.com/LIMXTEC/Bitcloud
 # !! THIS SCRIPT NEED TO RUN AS ROOT !!
 ######################################################################
 
@@ -9,8 +9,9 @@ cd
 clear
 # declare STRING variable
   STRING1="Make sure you double check before pressing enter! One chance at this only!"
-  STRING2="If you found this useful, please consider a small donation to BTDX Donation: "
-  STRING3="BNCzeBL1n6DmvCZhKqoZgjZLDJQTUi9TV9"
+  #STRING2="If you found this useful, please consider a small donation to BTDX Donation: "
+  #STRING3="BNCzeBL1n6DmvCZhKqoZgjZLDJQTUi9TV9"
+  STRING2="Creating 2GB SWAP File"
   STRING4="Updating system and installing required packages."
   STRING5="Switching to Aptitude"
   STRING6="Some optional installs"
@@ -23,7 +24,7 @@ clear
   STRING13=""
 
 # print variable on a screen
-  echo $STRING1 
+  echo $STRING1
 
 # Ask for important Data for configuring Masternode
   read -e -p "Server IP Address : " ip
@@ -32,14 +33,17 @@ clear
   read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 
   clear
-  echo $STRING2
-  echo $STRING13
-  echo $STRING3 
-  echo $STRING13
   echo $STRING4    
   sleep 10    
 
-# update package and upgrade Ubuntu
+# Create Swap File, update package and upgrade Ubuntu
+  echo $STRING13
+  echo $STRING2
+  sleep 1
+  dd if=/dev/zero of=/mnt/btdxswap.swap bs=2M count=1000
+  mkswap /mnt/mybtdxswap.swap
+  swapon /mnt/mybtdxswap.swap
+  sleep 5
   sudo apt-get -y update
   sudo apt-get -y upgrade
   sudo apt-get -y autoremove
@@ -64,7 +68,7 @@ clear
     sudo ufw default allow outgoing
     sudo ufw allow ssh
     sudo ufw allow 8329/tcp
-    sudo ufw enable -y
+    sudo ufw enable
   fi
 
 
@@ -88,10 +92,6 @@ clear
   sleep 40
 
   clear
-  echo $STRING2
-  echo $STRING13
-  echo $STRING3 
-  echo $STRING13
   echo $STRING4    
 
 
@@ -106,10 +106,6 @@ clear
 
 # Setting up coin
   clear
-  echo $STRING2
-  echo $STRING13
-  echo $STRING3
-  echo $STRING13
   echo $STRING4
   sleep 10
 
@@ -119,10 +115,6 @@ cd
   Bitcloud/src/bitcloudd #ist das 2. Starten des Daemons notwendig?
 
   clear
-  echo $STRING2
-  echo $STRING13
-  echo $STRING3
-  echo $STRING13
   echo $STRING4
   sleep 10
   echo $STRING7
@@ -140,10 +132,6 @@ cd
 
   cd
   clear
-  echo $STRING2
-  echo $STRING13
-  echo $STRING3 
-  echo $STRING13
   echo $STRING4    
 
   read -p "(this message will remain for at least 120 seconds) Then press any key to continue... " -n1 -s
