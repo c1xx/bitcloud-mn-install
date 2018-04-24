@@ -109,7 +109,7 @@ externalip='$ip'
 listen=1
 server=1
 daemon=1
-maxconnections=64
+maxconnections=128
 masternode=1
 masternodeprivkey='$key'
 ' | sudo -E tee ~/.bitcloud/bitcloud.conf >/dev/null 2>&1
@@ -121,25 +121,10 @@ sleep 40
 clear
 echo $STRING4    
 
-
-# Install Dinero Daemon
-#wget https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.0.7/linux.Ubuntu.16.04.LTS_non_static.tar.gz
-#sudo tar -xzvf linux.Ubuntu.16.04.LTS_non_static.tar.gz
-#sudo rm linux.Ubuntu.16.04.LTS_non_static.tar.gz
-#Bitcloud/src/bitcloudd
-#clear
- 
-#sleep 10
-
-# Setting up coin
-#clear
-#echo $STRING4
-#sleep 10
-
 cd
 
 # Starting Bitcloud daemon
-bitcloudd #ist das 2. Starten des Daemons notwendig?
+bitcloudd
 
 clear
 echo $STRING4
