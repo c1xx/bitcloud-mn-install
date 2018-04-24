@@ -139,7 +139,7 @@ echo $STRING4
 cd
 
 # Starting Bitcloud daemon
-Bitcloud/src/bitcloudd #ist das 2. Starten des Daemons notwendig?
+bitcloudd #ist das 2. Starten des Daemons notwendig?
 
 clear
 echo $STRING4
@@ -162,4 +162,4 @@ clear
 echo $STRING4    
 
 read -p "(this message will remain for at least 120 seconds) Then press any key to continue... " -n1 -s
-Bitcloud/src/bitcloud-cli getinfo
+bitcloud-cli getinfo
