@@ -52,7 +52,7 @@ sudo apt-get install automake build-essential libtool autotools-dev autoconf pkg
 sudo apt-get install libboost-all-dev git npm nodejs nodejs-legacy libminiupnpc-dev redis-server -y
 sudo apt-get install software-properties-common -y
 sudo apt-get install libevent-dev -y
-add-apt-repository ppa:bitcoin/bitcoin
+add-apt-repository ppa:bitcoin/bitcoin -y
 apt-get update -y
 apt-get install libdb4.8-dev libdb4.8++-dev -y
 curl https://raw.githubusercontent.com/creationix/nvm/v0.16.1/install.sh | sh
