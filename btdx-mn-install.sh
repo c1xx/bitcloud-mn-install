@@ -99,7 +99,8 @@ fi
 
 
 # Create bitcloud.conf
-sudo mkdir .bitcloud
+sudo mkdir ~/.bitcloud
+sudo touch ~/.bitcloud/bitcloud.conf
 echo '
 rpcuser='$password'
 rpcpassword='$password2'
