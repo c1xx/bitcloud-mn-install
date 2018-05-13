@@ -2,7 +2,7 @@
 # This script will install all required stuff to run a BitCloud (BTDX) Masternode.
 # BitCloud Repository : https://github.com/LIMXTEC/Bitcloud
 # !! THIS SCRIPT NEED TO RUN AS ROOT !!
-######################################################################
+##################################################################################
 
 cd
 
@@ -56,7 +56,7 @@ apt-get -y install aptitude
 # Cloning and compiling Bitcloud Wallet
 cd
 mkdir ~/Bitcloud/
-wget https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.0.7/linux.Ubuntu.16.04.LTS_non_static.tar.gz
+wget https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 tar -xvf linux.Ubuntu.16.04.LTS_non_static.tar.gz -C ~/Bitcloud/
 
 cd ~/Bitcloud
