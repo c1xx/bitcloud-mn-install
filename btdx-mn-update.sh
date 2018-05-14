@@ -51,7 +51,8 @@ sleep 5
 bitcloudd -daemon > /dev/null 2>&1
 
 # Show Version and Masternde Info
-echo "*** Masternode Output ***"
+echo ""
+echo "*** Masternode Output (after 60 sec wait time) ***"
 echo ""
 sleep 60
 bitcloud-cli getinfo
