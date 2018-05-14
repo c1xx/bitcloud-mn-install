@@ -11,30 +11,42 @@ CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 DATA_PATH=/usr/local/bin
 
 # Stop current running masternode
+echo "*** Stopping Masternode ***"
+echo ""
 $DATA_PATH/bitcloud-cli stop
 
 # Download current version, extract and copy
+echo "*** Downloading, extracting and copying files ***"
+echo ""
 cd ~
-wget $CORE_URL
-tar -xvf $CORE_FILE
+wget $CORE_URL > /dev/null 2>&1
+tar -xvf $CORE_FILE > /dev/null 2>&1
 
-strip bitcloudd
-strip bitcloud-cli
-strip bitcloud-tx
-yes | cp -iR bitcloudd /usr/local/bin
-yes | cp -iR bitcloud-cli /usr/local/bin
-yes | cp -iR bitcloud-tx /usr/local/bin
+strip bitcloudd > /dev/null 2>&1
+strip bitcloud-cli > /dev/null 2>&1
+strip bitcloud-tx > /dev/null 2>&1
+cp -f bitcloudd /usr/local/bin > /dev/null 2>&1
+cp -f bitcloud-cli /usr/local/bin > /dev/null 2>&1
+cp -f bitcloud-tx /usr/local/bin > /dev/null 2>&1
 
 # Delete Files
+echo "*** Deleting unnecessary files ***"
+echo ""
 sleep 5
-rm -f ~/$CORE_FILE
-rm -f ~/bitcloudd
-rm -f ~/bitcloud-cli
-rm -f ~/bitcloud-tx
+rm -f ~/$CORE_FILE > /dev/null 2>&1
+rm -f ~/bitcloudd > /dev/null 2>&1
+rm -f ~/bitcloud-cli > /dev/null 2>&1
+rm -f ~/bitcloud-tx > /dev/null 2>&1
+rm -f ~/bitcloud-qt > /dev/null 2>&1
 
 # Start Masternode running current version
-bitcloudd
+echo "*** Starting Masternode with current version (120 sec waiting time) ***"
+echo ""
+sleep 120
+bitcloudd -daemon
 
 # Show Version and Masternde Info
-sleep 120
+echo "*** Masternode Output ***"
+echo ""
+sleep 60
 bitcloud-cli getinfo
