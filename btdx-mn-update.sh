@@ -26,10 +26,10 @@ yes | cp -iR bitcloud-tx /usr/local/bin
 
 # Delete Files
 sleep 5
-yes | rm $CORE_FILE
-yes | rm bitcloudd
-yes | rm bitcloud-cli
-yes | rm bitcloud-tx
+rm -f $CORE_FILE
+rm -f bitcloudd
+rm -f bitcloud-cli
+rm -f bitcloud-tx
 
 # Start Masternode running current version
 bitcloudd
@@ -37,5 +37,3 @@ bitcloudd
 # Show Version and Masternde Info
 sleep 120
 bitcloud-cli getinfo
-sleep 5
-bitcloud-cli masternode status
