@@ -4,25 +4,29 @@
 # !! THIS SCRIPT NEED TO RUN AS ROOT !!
 ##################################################################################
 
+# Variables
+CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+
 # Stop current running masternode
 # If you have not used my Masternode install script, please change path to "bitcloud-cli" file!
 /usr/local/bin/bitcloud-cli stop
 
 # Download current version, extract and copy
 cd ~
-wget https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
-tar -xvf linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+wget $CORE_URL
+tar -xvf $CORE_FILE
 
 strip bitcloudd
 strip bitcloud-cli
 strip bitcloud-tx
-yes | cp bitcloudd /usr/local/bin -iR
-yes | cp bitcloud-cli /usr/local/bin -iR
-yes | cp bitcloud-tx /usr/local/bin -iR
+yes | cp -iR bitcloudd /usr/local/bin
+yes | cp -iR bitcloud-cli /usr/local/bin
+yes | cp -iR bitcloud-tx /usr/local/bin
 
 # Delete Files
 sleep 5
-yes | rm linux.Ubuntu.16.04.LTS_non_static.tar.gz
+yes | rm $CORE_FILE
 yes | rm bitcloudd
 yes | rm bitcloud-cli
 yes | rm bitcloud-tx
