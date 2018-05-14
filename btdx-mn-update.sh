@@ -13,7 +13,7 @@ DATA_PATH=/usr/local/bin
 # Stop current running masternode
 echo "*** Stopping Masternode ***"
 echo ""
-$DATA_PATH/bitcloud-cli stop
+$DATA_PATH/bitcloud-cli stop  > /dev/null 2>&1
 
 # Download current version, extract and copy
 echo "*** Downloading, extracting and copying files ***"
@@ -42,8 +42,11 @@ rm -f ~/bitcloud-qt > /dev/null 2>&1
 # Start Masternode running current version
 echo "*** Starting Masternode with current version (120 sec waiting time) ***"
 echo ""
-sleep 120
-bitcloudd -daemon
+bitcloudd -daemon > /dev/null 2>&1
+sleep 100
+bitcloud-cli stop > /dev/null 2>&1
+sleep 10
+bitcloudd -daemon > /dev/null 2>&1
 
 # Show Version and Masternde Info
 echo "*** Masternode Output ***"
