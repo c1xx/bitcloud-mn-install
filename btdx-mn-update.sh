@@ -40,12 +40,14 @@ rm -f ~/bitcloud-tx > /dev/null 2>&1
 rm -f ~/bitcloud-qt > /dev/null 2>&1
 
 # Start Masternode running current version
-echo "*** Starting Masternode with current version (120 sec waiting time) ***"
+echo "*** Starting Masternode with current version ***"
 echo ""
 bitcloudd -daemon > /dev/null 2>&1
-sleep 100
+echo "*** Please start you masternode via local desktop wallet debug console -> masternode start-alias YOURMASTERNODEALIAS ***"
+echo ""
+read -p "After starting your Masternode, press any key to continue... " -n1 -s
 bitcloud-cli stop > /dev/null 2>&1
-sleep 10
+sleep 5
 bitcloudd -daemon > /dev/null 2>&1
 
 # Show Version and Masternde Info
