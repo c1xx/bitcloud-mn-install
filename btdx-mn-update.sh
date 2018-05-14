@@ -11,21 +11,21 @@
 # Download current version, extract and copy
 cd ~
 wget https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
-tar -xvf linux.Ubuntu.16.04.LTS_non_static.tar.gz -C ~/Bitcloud/
+tar -xvf linux.Ubuntu.16.04.LTS_non_static.tar.gz
 
 strip bitcloudd
 strip bitcloud-cli
 strip bitcloud-tx
-yes | cp ~/Bitcloud/bitcloudd /usr/local/bin -iR
-yes | cp ~/Bitcloud/bitcloud-cli /usr/local/bin -iR
-yes | cp ~/Bitcloud/bitcloud-tx /usr/local/bin -iR
+yes | cp bitcloudd /usr/local/bin -iR
+yes | cp bitcloud-cli /usr/local/bin -iR
+yes | cp bitcloud-tx /usr/local/bin -iR
 
 # Delete Files
 sleep 5
-yes | rm ~/linux.Ubuntu.16.04.LTS_non_static.tar.gz
-yes | rm ~/Bitcloud/bitcloudd
-yes | rm ~/Bitcloud/bitcloud-cli
-yes | rm ~/Bitcloud/bitcloud-tx
+yes | rm linux.Ubuntu.16.04.LTS_non_static.tar.gz
+yes | rm bitcloudd
+yes | rm bitcloud-cli
+yes | rm bitcloud-tx
 
 # Start Masternode running current version
 bitcloudd
