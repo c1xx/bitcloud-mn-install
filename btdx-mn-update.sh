@@ -7,10 +7,11 @@
 # Variables
 CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+# If you have not used my Masternode install script, please change path to "bitcloud-cli" file!
+DATA_PATH=/usr/local/bin
 
 # Stop current running masternode
-# If you have not used my Masternode install script, please change path to "bitcloud-cli" file!
-/usr/local/bin/bitcloud-cli stop
+$DATA_PATH/bitcloud-cli stop
 
 # Download current version, extract and copy
 cd ~
@@ -26,10 +27,10 @@ yes | cp -iR bitcloud-tx /usr/local/bin
 
 # Delete Files
 sleep 5
-rm -f $CORE_FILE
-rm -f bitcloudd
-rm -f bitcloud-cli
-rm -f bitcloud-tx
+rm -f ~/$CORE_FILE
+rm -f ~/bitcloudd
+rm -f ~/bitcloud-cli
+rm -f ~/bitcloud-tx
 
 # Start Masternode running current version
 bitcloudd
