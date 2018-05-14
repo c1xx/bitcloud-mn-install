@@ -57,7 +57,7 @@ apt-get -y install aptitude
 cd
 mkdir ~/Bitcloud/
 wget https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
-tar -xvf linux.Ubuntu.16.04.LTS_non_static.tar.gz -C ~/Bitcloud/
+tar -xvf linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz -C ~/Bitcloud/
 
 cd ~/Bitcloud
 strip bitcloudd
