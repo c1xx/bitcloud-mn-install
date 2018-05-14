@@ -16,9 +16,16 @@ tar -xvf linux.Ubuntu.16.04.LTS_non_static.tar.gz -C ~/Bitcloud/
 strip bitcloudd
 strip bitcloud-cli
 strip bitcloud-tx
-yes | cp bitcloudd /usr/local/bin -iR
-yes | cp bitcloud-cli /usr/local/bin -iR
-yes | cp bitcloud-tx /usr/local/bin -iR
+yes | cp ~/Bitcloud/bitcloudd /usr/local/bin -iR
+yes | cp ~/Bitcloud/bitcloud-cli /usr/local/bin -iR
+yes | cp ~/Bitcloud/bitcloud-tx /usr/local/bin -iR
+
+# Delete Files
+sleep 5
+yes | rm ~/linux.Ubuntu.16.04.LTS_non_static.tar.gz
+yes | rm ~/Bitcloud/bitcloudd
+yes | rm ~/Bitcloud/bitcloud-cli
+yes | rm ~/Bitcloud/bitcloud-tx
 
 # Start Masternode running current version
 bitcloudd
