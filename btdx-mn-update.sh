@@ -47,7 +47,7 @@ bitcloudd -daemon > /dev/null 2>&1
 sleep 10; echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 echo "${RED_TEXT}Please start you masternode via local desktop wallet debug console -> masternode start-alias YOURMASTERNODEALIAS !${RESET_TEXT}"; echo ""
 read -p "After starting your Masternode, press any key to continue... " -n1 -s
-echo -n 'Stopping Masternode...'
+echo ""; echo -n 'Stopping Masternode...'
 bitcloud-cli stop > /dev/null 2>&1
 echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 sleep 5; echo -n 'Starting Masternode again...'

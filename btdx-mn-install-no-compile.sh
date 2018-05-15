@@ -89,8 +89,7 @@ fi
 # Create bitcloud.conf
 sudo mkdir ~/.bitcloud
 sudo touch ~/.bitcloud/bitcloud.conf
-echo '
-rpcuser='$password'
+echo 'rpcuser='$password'
 rpcpassword='$password2'
 rpcallowip=127.0.0.1
 masternodeaddr=127.0.0.1:8329
