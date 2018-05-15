@@ -11,7 +11,7 @@ RESET_TEXT=`tput sgr0`
 CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 
-echo "Make sure you double check before pressing enter! One chance at this only!"
+echo "Make sure you double check before pressing enter! One chance at this only!"; echo ""
 
 # Ask for important Data for configuring Masternode
 read -e -p "Server IP Address : " ip
@@ -20,6 +20,7 @@ read -e -p "Install Fail2ban? [Y/n] : " install_fail2ban
 read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 
 # Update, upgrade Ubuntu and install required packages
+clear
 cd ~ > /dev/null 2>&1
 echo -n 'Updating system and installing required packages...'
 sudo apt-get -y update > /dev/null 2>&1
