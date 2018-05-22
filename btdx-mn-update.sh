@@ -1,17 +1,23 @@
 #!/bin/bash
-# This script will update your BitCloud (BTDX) Masternode to version 2.0.1.0
-# BitCloud Repository : https://github.com/LIMXTEC/Bitcloud
-# !! THIS SCRIPT NEED TO RUN AS ROOT !!
-##################################################################################
 
 # Variables
 RED_TEXT=`tput setaf 1`
 GREEN_TEXT=`tput setaf 2`
 RESET_TEXT=`tput sgr0`
+REQUIRED_UBUNTU_VERSION="16.04"
 CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 # If you have not used my Masternode install script, please change path to bitcloud-cli & bitcloudd files!
 DATA_PATH=/usr/local/bin
+
+echo -n 'Checking Ubuntu Linux Version...'
+if [[ `lsb_release -rs` == $REQUIRED_UBUNTU_VERSION ]] # replace 8.04 by the number of release you want
+then
+	echo "${GREEN_TEXT} 16.04 OK ${RESET_TEXT}"; echo ""
+else
+	echo "${RED_TEXT} Your Server is not running Ubuntu $REQUIRED_UBUNTU_VERSION, please upgrade to Ubuntu $REQUIRED_UBUNTU_VERSION ! The script will be terminated... ${RESET_TEXT}"; echo ""
+	exit
+fi
 
 # Stop current running masternode
 echo -n 'Stopping Masternode...'
@@ -39,6 +45,11 @@ rm -f ~/bitcloudd > /dev/null 2>&1
 rm -f ~/bitcloud-cli > /dev/null 2>&1
 rm -f ~/bitcloud-tx > /dev/null 2>&1
 rm -f ~/bitcloud-qt > /dev/null 2>&1
+echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+
+# Crontab entry to start bitcloud after server reboot
+echo -n 'Creating crontab entry...'
+(crontab -l ; echo "@reboot sleep 15 && /usr/local/bin/bitcloudd -daemon -shrinkdebugfile")| crontab -
 echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 
 # Start Masternode running current version

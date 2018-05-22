@@ -1,15 +1,21 @@
 #!/bin/bash
-# This script will install all required stuff to run a BitCloud (BTDX) Masternode.
-# BitCloud Repository : https://github.com/LIMXTEC/Bitcloud
-# !! THIS SCRIPT NEED TO RUN AS ROOT !!
-##################################################################################
 
 # Variables
 RED_TEXT=`tput setaf 1`
 GREEN_TEXT=`tput setaf 2`
 RESET_TEXT=`tput sgr0`
+REQUIRED_UBUNTU_VERSION="16.04"
 CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+
+echo -n 'Checking Ubuntu Linux Version...'
+if [[ `lsb_release -rs` == $REQUIRED_UBUNTU_VERSION ]] # replace 8.04 by the number of release you want
+then
+	echo "${GREEN_TEXT} 16.04 OK ${RESET_TEXT}"; echo ""
+else
+	echo "${RED_TEXT} Your Server is not running Ubuntu $REQUIRED_UBUNTU_VERSION, please upgrade to Ubuntu $REQUIRED_UBUNTU_VERSION ! The script will be terminated... ${RESET_TEXT}"; echo ""
+	exit
+fi
 
 echo "Make sure you double check before pressing enter! One chance at this only!"; echo ""
 
@@ -58,6 +64,11 @@ echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 echo -n 'Deleting unnecessary files...'
 rm -f ~/$CORE_FILE > /dev/null 2>&1
 rm -rf ~/Bitcloud/ > /dev/null 2>&1
+echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+
+# Crontab entry to start bitcloud after server reboot
+echo -n 'Creating crontab entry...'
+(crontab -l ; echo "@reboot sleep 15 && /usr/local/bin/bitcloudd -daemon -shrinkdebugfile")| crontab -
 echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 
 # Installing, configuring Firewall and Fail2Ban
