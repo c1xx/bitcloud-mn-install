@@ -1,5 +1,7 @@
 # BitCloud Masternode setup & update script
 
+Please note that these scripts are only designed for Ubuntu 16.04. If you use it on another Ubuntu version, errors may occur.
+
 **For new masternode installation use:**
 
 ```
