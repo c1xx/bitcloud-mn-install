@@ -10,6 +10,7 @@ CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 # If you have not used my Masternode install script, please change path to bitcloud-cli & bitcloudd files!
 DATA_PATH=/usr/local/bin
 
+# Required Ubuntu Version check
 echo -n 'Checking Ubuntu Linux Version...'
 if [[ `lsb_release -rs` == $REQUIRED_UBUNTU_VERSION ]] # replace 8.04 by the number of release you want
 then
