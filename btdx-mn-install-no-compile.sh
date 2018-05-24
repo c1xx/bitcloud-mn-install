@@ -127,6 +127,7 @@ echo -n 'Starting Masternode...'
 bitcloudd -daemon > /dev/null 2>&1
 echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 echo "${RED_TEXT}Please start you masternode via local desktop wallet debug console -> masternode start-alias YOURMASTERNODEALIAS !${RESET_TEXT}"; echo ""
+read -p "After starting your Masternode, press any key to continue... " -n1 -s
 
 # Show Version and Masternde Info
 echo "Getting Masternode Output (60 sec waiting time...)"
