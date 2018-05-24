@@ -10,7 +10,7 @@ CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 
 # Required Ubuntu Version check
 echo -n 'Checking Ubuntu Linux Version...'
-if [[ `lsb_release -rs` == $REQUIRED_UBUNTU_VERSION ]] # replace 8.04 by the number of release you want
+if [[ `lsb_release -rs` == $REQUIRED_UBUNTU_VERSION ]]
 then
 	echo "${GREEN_TEXT} 16.04 OK ${RESET_TEXT}"; echo ""
 else
