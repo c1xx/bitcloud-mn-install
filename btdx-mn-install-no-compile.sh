@@ -18,6 +18,15 @@ else
 	exit
 fi
 
+read -e -p "Is your VPS Provider allowing to create SWAP file? If not sure hit enter! [Y/n] : " swapallowed
+if [[ ("$swapallowed" == "y" || "$swapallowed" == "Y") ]]; then
+  echo -n 'Creating 2GB SWAP file...'
+  dd if=/dev/zero of=/mnt/swapspace.swap bs=2M count=1000  > /dev/null 2>&1
+  mkswap /mnt/swapspace.swap
+  swapon /mnt/swapspace.swap
+  echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+fi
+
 echo "Make sure you double check before pressing enter! One chance at this only!"; echo ""
 
 # Ask for important Data for configuring Masternode
