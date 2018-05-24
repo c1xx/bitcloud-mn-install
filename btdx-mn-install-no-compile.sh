@@ -30,8 +30,10 @@ read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 clear
 cd ~ > /dev/null 2>&1
 echo -n 'Updating system and installing required packages...'
-sudo apt-get -y update > /dev/null 2>&1
-sudo apt-get -y upgrade > /dev/null 2>&1
+#sudo apt-get -y update > /dev/null 2>&1
+#sudo apt-get -y upgrade > /dev/null 2>&1
+#Testing other update commands
+sudo apt-get update && apt-get -o Dpkg::Options::="--force-confold" upgrade -q -y --force-yes
 sudo apt-get -y autoremove > /dev/null 2>&1
 sudo apt-get install wget nano htop -y > /dev/null 2>&1
 sudo apt-get install automake build-essential libtool autotools-dev autoconf pkg-config libssl-dev -y > /dev/null 2>&1
