@@ -42,9 +42,8 @@ read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 clear
 cd ~
 echo "Updating system and installing required packages..."
-export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -y update
-sudo apt-get -y upgrade
+sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 sudo apt-get -y autoremove
 sudo apt-get install wget nano htop -y
 sudo apt-get install automake build-essential libtool autotools-dev autoconf pkg-config libssl-dev -y
@@ -140,3 +139,4 @@ echo ""
 echo "Getting Masternode Output (60 sec waiting time...)"
 sleep 60
 bitcloud-cli getinfo
+rm -f ~/btdx-mn-install-no-compile.sh
