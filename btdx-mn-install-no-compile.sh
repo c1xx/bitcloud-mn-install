@@ -8,6 +8,9 @@ REQUIRED_UBUNTU_VERSION="16.04"
 CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 
+# clear screen
+clear
+
 # Required Ubuntu Version check
 echo -n 'Checking Ubuntu Linux Version...'
 if [[ `lsb_release -rs` == $REQUIRED_UBUNTU_VERSION ]] # replace 8.04 by the number of release you want
