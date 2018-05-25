@@ -42,6 +42,7 @@ read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 clear
 cd ~
 echo "Updating system and installing required packages..."
+export DEBIAN_FRONTEND=noninteractive
 sudo apt-get -y update
 sudo apt-get -y upgrade
 sudo apt-get -y autoremove
@@ -133,6 +134,7 @@ bitcloudd -daemon
 echo ""
 echo "${RED_TEXT}Please start you masternode via local desktop wallet debug console -> masternode start-alias YOURMASTERNODEALIAS !${RESET_TEXT}"; echo ""
 read -p "After starting your Masternode, press any key to continue... " -n1 -s
+echo ""
 
 # Show Version and Masternde Info
 echo "Getting Masternode Output (60 sec waiting time...)"
