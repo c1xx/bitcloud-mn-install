@@ -20,12 +20,14 @@ fi
 
 read -e -p "Is your VPS Provider allowing to create SWAP file? If not sure hit enter! [Y/n] : " swapallowed
 if [[ ("$swapallowed" == "y" || "$swapallowed" == "Y") ]]; then
-  echo -n 'Creating 2GB SWAP file...'
-  dd if=/dev/zero of=/mnt/swapspace.swap bs=2M count=1000 > /dev/null 2>&1
-  chmmod 0600 /mnt/swapspace.swap > /dev/null 2>&1
-  mkswap /mnt/swapspace.swap > /dev/null 2>&1
-  swapon /mnt/swapspace.swap > /dev/null 2>&1
-  echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+  echo "Creating 2GB SWAP file..."
+  sudo touch /mnt/swap.img
+  sudo chmod 0600 /mnt/swap.img
+  dd if=/dev/zero of=/mnt/swap.img bs=1024k count=2000
+  sudo mkswap /mnt/swap.img
+  sudo swapon /mnt/swap.img
+  sudo echo "/mnt/swap.img none swap sw 0 0" >> /etc/fstab
+  echo ""
 fi
 
 echo "Make sure you double check before pressing enter! One chance at this only!"; echo ""
@@ -38,76 +40,78 @@ read -e -p "Install UFW and configure ports? [Y/n] : " UFW
 
 # Update, upgrade Ubuntu and install required packages
 clear
-cd ~ > /dev/null 2>&1
-echo -n 'Updating system and installing required packages...'
-sudo apt-get -y update > /dev/null 2>&1
-sudo apt-get -y upgrade > /dev/null 2>&1
-sudo apt-get -y autoremove > /dev/null 2>&1
-sudo apt-get install wget nano htop -y > /dev/null 2>&1
-sudo apt-get install automake build-essential libtool autotools-dev autoconf pkg-config libssl-dev -y > /dev/null 2>&1
-sudo apt-get install libboost-all-dev git npm nodejs nodejs-legacy libminiupnpc-dev redis-server -y > /dev/null 2>&1
-sudo apt-get install software-properties-common -y > /dev/null 2>&1
-sudo apt-get install libevent-dev -y > /dev/null 2>&1
-add-apt-repository ppa:bitcoin/bitcoin -y > /dev/null 2>&1
-apt-get update -y > /dev/null 2>&1
-apt-get install libdb4.8-dev libdb4.8++-dev -y > /dev/null 2>&1
-source ~/.profile > /dev/null 2>&1
-apt-get -y install aptitude > /dev/null 2>&1
-echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+cd ~
+echo "Updating system and installing required packages..."
+sudo apt-get -y update
+sudo apt-get -y upgrade
+sudo apt-get -y autoremove
+sudo apt-get install wget nano htop -y
+sudo apt-get install automake build-essential libtool autotools-dev autoconf pkg-config libssl-dev -y
+sudo apt-get install libboost-all-dev git npm nodejs nodejs-legacy libminiupnpc-dev redis-server -y
+sudo apt-get install software-properties-common -y
+sudo apt-get install libevent-dev -y
+add-apt-repository ppa:bitcoin/bitcoin -y
+apt-get update -y
+apt-get install libdb4.8-dev libdb4.8++-dev -y
+source ~/.profile
+apt-get -y install aptitude
+echo ""
 
 # Download Wallet files and copying to /usr/local/bin
-echo -n 'Downloading Wallet files and extracting...'
-cd > /dev/null 2>&1
-mkdir ~/Bitcloud/ > /dev/null 2>&1
-wget $CORE_URL > /dev/null 2>&1
-tar -xvf $CORE_FILE -C ~/Bitcloud/ > /dev/null 2>&1
+echo "Downloading Wallet files and extracting..."
+cd
+mkdir ~/Bitcloud/
+wget $CORE_URL
+tar -xvf $CORE_FILE -C ~/Bitcloud/
 
-cd ~/Bitcloud > /dev/null 2>&1
-strip bitcloudd > /dev/null 2>&1
-strip bitcloud-cli > /dev/null 2>&1
-strip bitcloud-tx > /dev/null 2>&1
-cp -f bitcloudd /usr/local/bin > /dev/null 2>&1
-cp -f bitcloud-cli /usr/local/bin > /dev/null 2>&1
-cp -f bitcloud-tx /usr/local/bin > /dev/null 2>&1
-echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+cd ~/Bitcloud
+strip bitcloudd
+strip bitcloud-cli
+strip bitcloud-tx
+cp -f bitcloudd /usr/local/bin
+cp -f bitcloud-cli /usr/local/bin
+cp -f bitcloud-tx /usr/local/bin
+echo ""
 
 # Delete Files
-echo -n 'Deleting unnecessary files...'
-rm -f ~/$CORE_FILE > /dev/null 2>&1
-rm -rf ~/Bitcloud/ > /dev/null 2>&1
-echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+echo "Deleting unnecessary files..."
+rm -f ~/$CORE_FILE
+rm -rf ~/Bitcloud/
+echo ""
 
 # Crontab entry to start bitcloud after server reboot
-echo -n 'Creating crontab entry...'
+echo "Creating crontab entry..."
 (crontab -l ; echo "@reboot sleep 15 && /usr/local/bin/bitcloudd -daemon -shrinkdebugfile")| crontab -
-echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+echo ""
 
 # Installing, configuring Firewall and Fail2Ban
 if [[ ("$install_fail2ban" == "y" || "$install_fail2ban" == "Y" || "$install_fail2ban" == "") ]]; then
-  echo -n 'Installing and starting Fail2Ban...'
+  echo "Installing and starting Fail2Ban..."
   cd ~
-  sudo aptitude -y install fail2ban > /dev/null 2>&1
-  sudo service fail2ban restart > /dev/null 2>&1
-  echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+  sudo aptitude -y install fail2ban
+  sudo service fail2ban restart
+  echo ""
 fi
 if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
-  echo -n 'Installing and starting Firewall...'
-  sudo apt-get install ufw > /dev/null 2>&1
-  sudo ufw default deny incoming > /dev/null 2>&1
-  sudo ufw default allow outgoing > /dev/null 2>&1
-  sudo ufw allow ssh > /dev/null 2>&1
-  sudo ufw allow 8329/tcp > /dev/null 2>&1
-  sudo echo "y" | sudo ufw enable > /dev/null 2>&1
-  echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+  echo "Installing and starting Firewall..."
+  sudo apt-get install ufw
+  sudo ufw default deny incoming
+  sudo ufw default allow outgoing
+  sudo ufw logging on
+  sudo ufw allow ssh/tcp
+  sudo ufw limit ssh/tcp
+  sudo ufw allow 8329/tcp
+  sudo echo "y" | sudo ufw enable
+  echo ""
 fi
 
 # Generating Random Passwords, creating bitcloud.conf file
-echo -n 'Creating bitcloud.conf file...'
+echo "Creating bitcloud.conf file..."
 password=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 password2=`cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1`
 
-sudo mkdir ~/.bitcloud > /dev/null 2>&1
-sudo touch ~/.bitcloud/bitcloud.conf > /dev/null 2>&1
+sudo mkdir ~/.bitcloud
+sudo touch ~/.bitcloud/bitcloud.conf
 echo 'rpcuser='$password'
 rpcpassword='$password2'
 rpcallowip=127.0.0.1
@@ -120,13 +124,13 @@ maxconnections=128
 masternode=1
 masternodeprivkey='$key'
 ' | sudo -E tee ~/.bitcloud/bitcloud.conf >/dev/null 2>&1
-    sudo chmod 0600 ~/.bitcloud/bitcloud.conf > /dev/null 2>&1
-echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+    sudo chmod 0600 ~/.bitcloud/bitcloud.conf
+echo ""
 
 # Starting Bitcloud daemon
-echo -n 'Starting Masternode...'
-bitcloudd -daemon > /dev/null 2>&1
-echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
+echo "Starting Masternode..."
+bitcloudd -daemon
+echo ""
 echo "${RED_TEXT}Please start you masternode via local desktop wallet debug console -> masternode start-alias YOURMASTERNODEALIAS !${RESET_TEXT}"; echo ""
 read -p "After starting your Masternode, press any key to continue... " -n1 -s
 
