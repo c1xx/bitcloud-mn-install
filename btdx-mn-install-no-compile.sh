@@ -48,7 +48,7 @@ echo "Updating system and installing required packages..."
 sudo apt-get -y update
 sudo DEBIAN_FRONTEND=noninteractive apt-get -y upgrade
 sudo apt-get -y autoremove
-sudo apt-get install wget nano htop -y
+sudo apt-get install curl wget nano htop -y
 sudo apt-get install automake build-essential libtool autotools-dev autoconf pkg-config libssl-dev -y
 sudo apt-get install libboost-all-dev git npm nodejs nodejs-legacy libminiupnpc-dev redis-server -y
 sudo apt-get install software-properties-common -y
@@ -62,6 +62,8 @@ echo ""
 
 # Download Wallet files and copying to /usr/local/bin
 echo "Downloading Wallet files and extracting..."
+CORE_URL=$(curl -s https://api.github.com/repos/LIMXTEC/Bitcloud/releases/latest | grep -i "linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz" | grep -i "browser_download_url" | awk -F" " '{print $2}' | sed 's/"//g')
+CORE_FILE=$(curl -s https://api.github.com/repos/LIMXTEC/Bitcloud/releases/latest | grep -i "linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz" | grep -i "name" | awk -F" " '{print $2}' | sed 's/"//g' | sed 's/,//g')
 cd
 mkdir ~/Bitcloud/
 wget $CORE_URL

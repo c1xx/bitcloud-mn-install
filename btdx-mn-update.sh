@@ -5,8 +5,8 @@ RED_TEXT=`tput setaf 1`
 GREEN_TEXT=`tput setaf 2`
 RESET_TEXT=`tput sgr0`
 REQUIRED_UBUNTU_VERSION="16.04"
-CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.1/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
-CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+#CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.1/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+#CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 # If you have not used my Masternode install script, please change path to bitcloud-cli & bitcloudd files!
 DATA_PATH=/usr/local/bin
 
@@ -25,8 +25,11 @@ echo -n 'Stopping Masternode...'
 $DATA_PATH/bitcloud-cli stop  > /dev/null 2>&1
 sleep 5; echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 
-# Download current version, extract and copy
+# Install CURL, Download current version, extract and copy
 echo -n 'Downloading, extracting and copying files...'
+sudo apt-get install curl -y
+CORE_URL=$(curl -s https://api.github.com/repos/LIMXTEC/Bitcloud/releases/latest | grep -i "linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz" | grep -i "browser_download_url" | awk -F" " '{print $2}' | sed 's/"//g')
+CORE_FILE=$(curl -s https://api.github.com/repos/LIMXTEC/Bitcloud/releases/latest | grep -i "linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz" | grep -i "name" | awk -F" " '{print $2}' | sed 's/"//g' | sed 's/,//g')
 cd ~
 wget $CORE_URL > /dev/null 2>&1
 tar -xvf $CORE_FILE > /dev/null 2>&1
