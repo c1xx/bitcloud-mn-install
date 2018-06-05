@@ -5,7 +5,7 @@ RED_TEXT=`tput setaf 1`
 GREEN_TEXT=`tput setaf 2`
 RESET_TEXT=`tput sgr0`
 REQUIRED_UBUNTU_VERSION="16.04"
-CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.0/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
+CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.1/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 
 # clear screen
