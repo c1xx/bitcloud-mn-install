@@ -73,3 +73,4 @@ echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 echo "Getting Masternode Output (60 sec waiting time...)"
 sleep 60
 bitcloud-cli getinfo
+rm -f ~/btdx-mn-update.sh
