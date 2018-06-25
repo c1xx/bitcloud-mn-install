@@ -27,7 +27,7 @@ sleep 5; echo "${GREEN_TEXT} OK ${RESET_TEXT}"; echo ""
 
 # Install CURL, Download current version, extract and copy
 echo -n 'Downloading, extracting and copying files...'
-sudo apt-get install curl -y
+sudo apt-get install curl -y > /dev/null 2>&1
 CORE_URL=$(curl -s https://api.github.com/repos/LIMXTEC/Bitcloud/releases/latest | grep -i "linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz" | grep -i "browser_download_url" | awk -F" " '{print $2}' | sed 's/"//g')
 CORE_FILE=$(curl -s https://api.github.com/repos/LIMXTEC/Bitcloud/releases/latest | grep -i "linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz" | grep -i "name" | awk -F" " '{print $2}' | sed 's/"//g' | sed 's/,//g')
 cd ~
