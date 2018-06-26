@@ -144,4 +144,4 @@ echo ""
 echo "Getting Masternode Output (60 sec waiting time...)"
 sleep 60
 bitcloud-cli getinfo
-rm -f ~/btdx-mn-install-no-compile.sh
+rm -f ~/btdx-mn-install.sh
