@@ -5,8 +5,6 @@ RED_TEXT=`tput setaf 1`
 GREEN_TEXT=`tput setaf 2`
 RESET_TEXT=`tput sgr0`
 REQUIRED_UBUNTU_VERSION="16.04"
-CORE_URL=https://github.com/LIMXTEC/Bitcloud/releases/download/2.0.1.1/linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
-CORE_FILE=linux.Ubuntu.16.04.LTS-static-libstdc.tar.gz
 
 # clear screen
 clear
@@ -106,6 +104,7 @@ if [[ ("$UFW" == "y" || "$UFW" == "Y" || "$UFW" == "") ]]; then
   sudo ufw allow ssh/tcp
   sudo ufw limit ssh/tcp
   sudo ufw allow 8329/tcp
+  sudo ufw allow 8330/tcp
   sudo echo "y" | sudo ufw enable
   echo ""
 fi
@@ -120,6 +119,7 @@ sudo touch ~/.bitcloud/bitcloud.conf
 echo 'rpcuser='$password'
 rpcpassword='$password2'
 rpcallowip=127.0.0.1
+rpcport=8330
 masternodeaddr=127.0.0.1:8329
 externalip='$ip'
 listen=1
