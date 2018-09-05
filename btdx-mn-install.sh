@@ -128,6 +128,7 @@ daemon=1
 maxconnections=128
 masternode=1
 masternodeprivkey='$key'
+addnode=seed.bitcloud.network
 ' | sudo -E tee ~/.bitcloud/bitcloud.conf >/dev/null 2>&1
     sudo chmod 0600 ~/.bitcloud/bitcloud.conf
 echo ""
